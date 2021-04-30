@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.GenericServlet;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -73,6 +74,7 @@ public class DepartmentServlet extends GenericServlet {
 		}
 		else if(buttonValue.equals("Find All Depts")) 
 		{
+			
 			pw.println("<table border=1 cellspacing=10 cellpadding=10>");
 			pw.println("<th>");		pw.println("DEPT NO");	pw.println("</th>");
 			pw.println("<th>");		pw.println("DEPT NAME");pw.println("</th>");
@@ -99,6 +101,10 @@ public class DepartmentServlet extends GenericServlet {
 					pw.println("</tr>");
 				}
 			pw.println("</table>");
+			
+			
+			
+			
 		}
 		else if (buttonValue.equals("Modify Dept"))
 		{
@@ -127,7 +133,12 @@ public class DepartmentServlet extends GenericServlet {
 			Department deptObj = new Department(); //blank one
 			deptObj.setDepartmentNumber(dno);
 
-			ddi.removeDepartment(deptObj);
+			try {
+				ddi.removeDepartment(deptObj);
+			} catch (DepartmentNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			pw.println("<h4> Department is deleted</h4>");
 			
 		}
